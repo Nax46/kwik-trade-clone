@@ -69,7 +69,7 @@ app.get('/api', (req, res) => {
   })
 })
 
-import { testSMTP } from './config/mailer.js'
+import { testSMTP } from './backend/config/mailer.js'
 
 testSMTP()
 

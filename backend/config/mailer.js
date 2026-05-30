@@ -10,11 +10,15 @@ export async function testSMTP() {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
+      logger: true,
+      debug: true,
     })
 
-    const result = await transporter.verify()
+    console.log('Starting SMTP verify...')
 
-    console.log('SMTP VERIFY SUCCESS:', result)
+    await transporter.verify()
+
+    console.log('SMTP VERIFY SUCCESS')
   } catch (err) {
     console.error('SMTP VERIFY ERROR:', err)
   }
@@ -29,5 +33,7 @@ export function createTransporter() {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
+    logger: true,
+    debug: true,
   })
 }
