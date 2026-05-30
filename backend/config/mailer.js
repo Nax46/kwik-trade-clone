@@ -34,16 +34,12 @@ export function createTransporter() {
   console.log('EMAIL_PASS exists:', !!pass)
 
   return nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    auth: {
-      user,
-      pass,
-    },
-    connectionTimeout: 30000,
-    greetingTimeout: 30000,
-    socketTimeout: 30000,
-    debug: true,
-  })
-}
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user,
+    pass,
+  },
+  debug: true,
+})
