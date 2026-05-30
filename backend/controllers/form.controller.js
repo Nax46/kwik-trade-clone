@@ -70,10 +70,19 @@ export async function submitForm(req, res) {
       })
     }
 
-    const transporter = createTransporter()
-    const recipient = process.env.EMAIL_USER
+    // const transporter = createTransporter()
+    // const recipient = process.env.EMAIL_USER
 
-    await transporter.sendMail({
+    // await transporter.sendMail({
+
+    const transporter = createTransporter()
+const recipient = process.env.EMAIL_USER
+
+console.log('Sending email...')
+console.log('Recipient:', recipient)
+console.log('Form Type:', normalizedType)
+
+await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: recipient,
       replyTo: email || process.env.EMAIL_USER,
@@ -83,6 +92,8 @@ export async function submitForm(req, res) {
         fields: normalizedFields,
       }),
     })
+
+    console.log('Email sent successfully')
 
     return res.status(200).json({
       success: true,
