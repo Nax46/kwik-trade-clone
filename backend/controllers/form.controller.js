@@ -99,12 +99,12 @@ export async function submitForm(req, res) {
 
 const transporter = createTransporter()
 
-const recipient = 'naxchaudhary46@gmail.com'
+const recipient = 'chaudharynax27@gmail.com'
 
 await transporter.sendMail({
-  from: 'Kwik Trade <naxchaudhary46@gmail.com>',
+  from: 'Kwik Trade <chaudharynax27@gmail.com>',
   to: recipient,
-  replyTo: email || 'naxchaudhary46@gmail.com',
+  replyTo: email || 'chaudharynax27@gmail.com',
   subject: `New ${normalizedType} Submission - Kwik Trade`,
   text: buildSubmissionBody({
     formType: normalizedType,
