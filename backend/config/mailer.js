@@ -24,7 +24,6 @@
 
 
 
-
 import nodemailer from 'nodemailer'
 
 export function createTransporter() {
@@ -35,14 +34,16 @@ export function createTransporter() {
   console.log('EMAIL_PASS exists:', !!pass)
 
   return nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
     auth: {
       user,
       pass,
     },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000,
+    connectionTimeout: 30000,
+    greetingTimeout: 30000,
+    socketTimeout: 30000,
     debug: true,
   })
 }

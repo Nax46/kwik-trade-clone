@@ -82,6 +82,9 @@ console.log('Sending email...')
 console.log('Recipient:', recipient)
 console.log('Form Type:', normalizedType)
 
+await transporter.verify()
+console.log('SMTP verified')
+
 await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: recipient,
