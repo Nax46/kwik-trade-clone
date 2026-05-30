@@ -75,26 +75,42 @@ export async function submitForm(req, res) {
 
     // await transporter.sendMail({
 
-    const transporter = createTransporter()
-const recipient = process.env.EMAIL_USER
+//     const transporter = createTransporter()
+// const recipient = process.env.EMAIL_USER
 
-console.log('Sending email...')
-console.log('Recipient:', recipient)
-console.log('Form Type:', normalizedType)
+// console.log('Sending email...')
+// console.log('Recipient:', recipient)
+// console.log('Form Type:', normalizedType)
 
-await transporter.verify()
-console.log('SMTP verified')
+// await transporter.verify()
+// console.log('SMTP verified')
+
+// await transporter.sendMail({
+//       from: process.env.EMAIL_USER,
+//       to: recipient,
+//       replyTo: email || process.env.EMAIL_USER,
+//       subject: `New ${normalizedType} Submission - Kwik Trade`,
+//       text: buildSubmissionBody({
+//         formType: normalizedType,
+//         fields: normalizedFields,
+//       }),
+//     })
+
+
+const transporter = createTransporter()
+
+const recipient = 'naxchaudhary46@gmail.com'
 
 await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: recipient,
-      replyTo: email || process.env.EMAIL_USER,
-      subject: `New ${normalizedType} Submission - Kwik Trade`,
-      text: buildSubmissionBody({
-        formType: normalizedType,
-        fields: normalizedFields,
-      }),
-    })
+  from: 'Kwik Trade <naxchaudhary46@gmail.com>',
+  to: recipient,
+  replyTo: email || 'naxchaudhary46@gmail.com',
+  subject: `New ${normalizedType} Submission - Kwik Trade`,
+  text: buildSubmissionBody({
+    formType: normalizedType,
+    fields: normalizedFields,
+  }),
+})
 
     console.log('Email sent successfully')
 
