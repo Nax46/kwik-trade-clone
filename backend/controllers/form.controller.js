@@ -100,7 +100,7 @@ export async function submitForm(req, res) {
 const transporter = createTransporter()
 
 const recipient = 'chaudharynax27@gmail.com'
-
+console.log('Before sendMail')
 await transporter.sendMail({
   from: 'Kwik Trade <chaudharynax27@gmail.com>',
   to: recipient,
@@ -111,6 +111,7 @@ await transporter.sendMail({
     fields: normalizedFields,
   }),
 })
+console.log('After sendMail')
 
     console.log('Email sent successfully')
 
@@ -118,11 +119,22 @@ await transporter.sendMail({
       success: true,
       message: `${normalizedType} form submitted successfully`,
     })
-  } catch (error) {
-    console.error('Form submission error:', error.message)
-    return res.status(500).json({
-      success: false,
-      message: 'Something went wrong',
-    })
-  }
+  } 
+  catch (error) {
+  console.error('FULL ERROR =>', error)
+  console.error('MESSAGE =>', error?.message)
+  console.error('CODE =>', error?.code)
+
+  return res.status(500).json({
+    success: false,
+    message: error?.message || 'Something went wrong',
+  })
+}
+  // catch (error) {
+  //   console.error('Form submission error:', error.message)
+  //   return res.status(500).json({
+  //     success: false,
+  //     message: 'Something went wrong',
+  //   })
+  // }
 }

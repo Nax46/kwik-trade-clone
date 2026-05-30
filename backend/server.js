@@ -69,6 +69,10 @@ app.get('/api', (req, res) => {
   })
 })
 
+import { testSMTP } from './config/mailer.js'
+
+testSMTP()
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
