@@ -1,73 +1,84 @@
-# React + TypeScript + Vite
+# TradeWithManish.com
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Production-ready trading education platform: React frontend, Express + MongoDB API, JWT admin panel.
 
-Currently, two official plugins are available:
+**Tagline:** Simplifying Trading For Every Trader
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+| Layer | Technology |
+|-------|------------|
+| Frontend | React 19, Vite, Tailwind, TanStack Query, React Hook Form, Zod |
+| Backend | Express 5, TypeScript, Mongoose, JWT, Bcrypt, Nodemailer |
+| Database | MongoDB Atlas |
+| Deploy | Vercel (frontend), Railway (API) |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Quick start
 
-## Expanding the ESLint configuration
+### 1. MongoDB Atlas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Create a cluster and copy the connection string.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 2. Backend
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd backend
+cp .env.example .env
+# Edit MONGODB_URI, JWT_SECRET, SMTP_*, ADMIN_*
+npm install
+npm run seed:admin
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+API: `http://localhost:5000/api/v1/health`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 3. Frontend
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cp .env.example .env
+# VITE_API_URL=http://localhost:5000/api/v1
+npm install
+npm run dev
 ```
+
+Site: `http://localhost:5173`  
+Admin: `http://localhost:5173/admin/login`
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Database](docs/DATABASE.md)
+- [API](docs/API.md)
+
+## Features
+
+- Public site: Home, About, Services, Mentorship, Blog, Market Insights, Resources, Consultation, Contact, FAQ, legal pages
+- Real API: leads, bookings, newsletter, analytics, CMS content
+- Admin: dashboard charts, lead/booking management, blogs, insights, resources, testimonials, settings, profile
+- Security: Helmet, rate limiting, CORS, Zod validation, mongo-sanitize
+- Email: Nodemailer notifications for new leads and bookings
+
+## Deployment
+
+### Vercel (frontend)
+
+- Root directory: project root
+- Build: `npm run build`
+- Output: `dist`
+- Env: `VITE_API_URL`, `VITE_SITE_URL`
+
+### Railway (backend)
+
+- Root: `backend`
+- Start: `npm run build && npm start`
+- Env: see `backend/.env.example`
+
+### MongoDB Atlas
+
+Allow Railway/Vercel IPs or `0.0.0.0/0` for development.
+
+## Contact (default settings)
+
+- Phone: 8155952384
+- Email: naxchaudhary46@gmail.com
+- Location: Deesa, Gujarat 385535

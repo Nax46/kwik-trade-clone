@@ -14,10 +14,10 @@ type ButtonProps = {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-gradient-to-r from-cyan-500 to-trade text-surface font-semibold shadow-glow hover:from-cyan-400 hover:to-emerald-400 focus-visible:ring-accent',
-  ghost: 'text-slate-300 hover:bg-white/5 hover:text-white',
+    'bg-gradient-to-r from-brand-600 to-indigo-600 text-white shadow-soft hover:from-brand-500 hover:to-indigo-500 focus-visible:ring-brand-500',
+  ghost: 'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
   outline:
-    'border border-border-strong bg-transparent text-white hover:border-accent/50 hover:bg-accent/5',
+    'border border-slate-200 bg-white text-slate-700 shadow-sm hover:border-brand-300 hover:text-brand-700 focus-visible:ring-brand-500',
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -36,7 +36,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const classes = [
-    'inline-flex items-center justify-center gap-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:pointer-events-none disabled:opacity-50',
+    'inline-flex items-center justify-center gap-2 font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
     variantClasses[variant],
     sizeClasses[size],
     className,

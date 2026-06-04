@@ -1,5 +1,5 @@
-import { ChevronDown } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 
 export type AccordionItem = {
@@ -10,14 +10,15 @@ export type AccordionItem = {
 
 type AccordionProps = {
   items: AccordionItem[]
+  defaultOpenId?: string
 }
 
-export function Accordion({ items }: AccordionProps) {
-  const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null)
+export function Accordion({ items, defaultOpenId }: AccordionProps) {
+  const [openId, setOpenId] = useState<string | null>(defaultOpenId ?? items[0]?.id ?? null)
 
   return (
     <motion.div
-      className="divide-y divide-border rounded-2xl border border-border bg-surface-raised"
+      className="divide-y divide-slate-200 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-soft"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -27,18 +28,18 @@ export function Accordion({ items }: AccordionProps) {
         const isOpen = openId === item.id
 
         return (
-          <motion.div key={item.id} layout>
+          <div key={item.id}>
             <button
               type="button"
-              className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left transition hover:bg-white/[0.02] sm:px-6"
+              className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left transition hover:bg-slate-50 sm:px-6"
               aria-expanded={isOpen}
               onClick={() => setOpenId(isOpen ? null : item.id)}
             >
-              <span className="font-medium text-white">{item.question}</span>
+              <span className="font-medium text-slate-900">{item.question}</span>
               <motion.span
                 animate={{ rotate: isOpen ? 180 : 0 }}
                 transition={{ duration: 0.25 }}
-                className="shrink-0 text-muted"
+                className="shrink-0 text-slate-400"
               >
                 <ChevronDown className="h-5 w-5" aria-hidden />
               </motion.span>
@@ -53,13 +54,13 @@ export function Accordion({ items }: AccordionProps) {
                   transition={{ duration: 0.25, ease: 'easeInOut' }}
                   className="overflow-hidden"
                 >
-                  <p className="px-5 pb-5 text-sm leading-relaxed text-muted sm:px-6">
+                  <p className="px-5 pb-5 text-sm leading-relaxed text-slate-600 sm:px-6">
                     {item.answer}
                   </p>
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </div>
         )
       })}
     </motion.div>

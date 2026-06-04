@@ -1,14 +1,21 @@
-import { BrowserRouter } from 'react-router-dom'
-import { AuthProvider } from './context/AuthContext'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { ErrorBoundary } from './components/common/ErrorBoundary'
+import { AdminAuthProvider } from './context/AdminAuthContext'
+import { ToastProvider } from './context/ToastContext'
+import { queryClient } from './lib/queryClient'
 import { AppRoutes } from './routes/AppRoutes'
 
 function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <ToastProvider>
+          <AdminAuthProvider>
+            <AppRoutes />
+          </AdminAuthProvider>
+        </ToastProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   )
 }
 

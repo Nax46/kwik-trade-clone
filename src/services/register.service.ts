@@ -1,4 +1,4 @@
-import { submitGenericForm } from './form.service'
+import { api } from '../api'
 
 export type RegisterEmailPayload = {
   fullName: string
@@ -14,12 +14,12 @@ export type RegisterApiResponse = {
 export async function registerUserEmail(
   data: RegisterEmailPayload,
 ): Promise<RegisterApiResponse> {
-  return submitGenericForm({
-    formType: 'Register',
-    fields: {
-      fullName: data.fullName,
-      email: data.email,
-      phone: data.phone,
-    },
+  await api.createLead({
+    name: data.fullName,
+    email: data.email,
+    phone: data.phone,
+    message: 'Account registration request',
+    source: 'registration',
   })
+  return { success: true, message: 'Registration received. We will be in touch shortly.' }
 }

@@ -40,11 +40,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const register = useCallback(async (data: RegisterFormValues) => {
-    await registerUserEmail({
+    const result = await registerUserEmail({
       fullName: data.fullName,
       email: data.email,
       phone: data.phone,
     })
+    if (!result.success) {
+      throw new Error(result.message)
+    }
 
     saveStoredUser({
       fullName: data.fullName,

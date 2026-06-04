@@ -1,5 +1,5 @@
+import { api } from '../api'
 import type { ContactFormValues } from '../lib/validations/contact'
-import { submitGenericForm } from './form.service'
 
 export type ContactApiResponse = {
   success: boolean
@@ -9,14 +9,6 @@ export type ContactApiResponse = {
 export async function submitContactForm(
   data: ContactFormValues,
 ): Promise<ContactApiResponse> {
-  return submitGenericForm({
-    formType: 'Contact',
-    fields: {
-      fullName: data.fullName,
-      email: data.email,
-      phone: data.phone,
-      subject: data.subject,
-      message: data.message,
-    },
-  })
+  await api.submitContact({ ...data, source: 'contact' })
+  return { success: true, message: 'Thank you. We will contact you soon.' }
 }

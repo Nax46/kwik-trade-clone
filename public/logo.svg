@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="TradeWithManish logo">
+  <defs>
+    <linearGradient id="tm-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="url(#tm-blue)"/>
+  <path fill="#ffffff" d="M32 78V42h14.2c8.4 0 13.6 4.2 13.6 11.2 0 4.8-2.4 8.4-6.2 10.2L62 78H46.8l-6.8-11.6H46V78H32zm14-22.4h5.8c3.2 0 4.8-1.4 4.8-4.2s-1.6-4.2-4.8-4.2H46v8.4z"/>
+  <path fill="#ffffff" opacity="0.95" d="M68 78V42h22.4c10.8 0 17.6 6.4 17.6 18s-6.8 18-17.6 18H68zm14.2-12.8h7.6c5.6 0 8.8-3.2 8.8-9s-3.2-9-8.8-9h-7.6v18z"/>
+  <circle cx="94" cy="34" r="6" fill="#93c5fd"/>
+</svg>

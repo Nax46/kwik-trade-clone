@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   html {
@@ -12,7 +12,7 @@
   }
 
   body {
-    @apply m-0 min-h-svh bg-surface font-sans text-slate-200;
+    @apply m-0 min-h-svh overflow-x-hidden bg-white font-sans text-slate-700;
   }
 
   #root {
@@ -20,8 +20,109 @@
   }
 }
 
+@layer components {
+  .section-container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-spacing {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-slate-200/80 bg-white shadow-soft transition hover:shadow-card;
+  }
+
+  .card-surface-interactive {
+    @apply card-surface cursor-pointer hover:border-brand-300 active:scale-[0.99];
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-600 to-indigo-600 bg-clip-text text-transparent;
+  }
+
+  .label-base {
+    @apply mb-1.5 block text-sm font-medium text-slate-700;
+  }
+
+  .input-base {
+    @apply w-full min-h-[44px] rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 transition focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20 disabled:cursor-not-allowed disabled:opacity-60 sm:text-sm;
+  }
+
+  .input-base-error {
+    @apply border-red-300 focus:border-red-400 focus:ring-red-500/20;
+  }
+
+  .error-text {
+    @apply mt-1.5 text-sm text-red-600;
+  }
+
+  .hint-text {
+    @apply mt-1.5 text-xs text-slate-500;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:from-brand-500 hover:to-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  .btn-outline {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-brand-300 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2;
+  }
+
+  .selection-card {
+    @apply rounded-xl border-2 border-slate-200 bg-white p-4 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2;
+  }
+
+  .selection-card-selected {
+    @apply border-brand-500 bg-brand-50 shadow-sm ring-1 ring-brand-500/30;
+  }
+
+  .selection-card-unselected {
+    @apply hover:border-brand-300 hover:bg-slate-50/80;
+  }
+
+  .alert-success {
+    @apply rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800;
+  }
+
+  .alert-error {
+    @apply rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700;
+  }
+
+  .admin-card {
+    @apply rounded-xl border border-slate-200 bg-white shadow-sm;
+  }
+}
+
 @layer utilities {
-  .glass-panel {
-    @apply border border-border bg-surface-raised/70 backdrop-blur-xl;
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgb(241 245 249) 0%,
+      rgb(226 232 240) 50%,
+      rgb(241 245 249) 100%
+    );
+    background-size: 200% 100%;
+    @apply animate-shimmer;
+  }
+
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
   }
 }

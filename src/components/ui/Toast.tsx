@@ -27,7 +27,7 @@ export function Toast({ toast, onDismiss, duration = 5000 }: ToastProps) {
   const isSuccess = toast?.variant === 'success'
 
   return (
-    <div className="pointer-events-none fixed bottom-4 right-4 z-[100] flex max-w-sm flex-col gap-2 sm:bottom-6 sm:right-6">
+    <div className="pointer-events-none fixed bottom-4 left-4 right-4 z-[100] flex flex-col items-center gap-2 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-sm">
       <AnimatePresence>
         {toast && (
           <motion.div
@@ -36,22 +36,22 @@ export function Toast({ toast, onDismiss, duration = 5000 }: ToastProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.96 }}
             transition={{ duration: 0.25 }}
-            className={`pointer-events-auto flex items-start gap-3 rounded-xl border px-4 py-3 shadow-card ${
+            className={`pointer-events-auto flex w-full items-start gap-3 rounded-xl border px-4 py-3 shadow-card sm:w-auto ${
               isSuccess
-                ? 'border-accent/40 bg-surface-raised text-emerald-100'
-                : 'border-danger/40 bg-surface-raised text-red-100'
+                ? 'border-emerald-200 bg-white text-emerald-900'
+                : 'border-red-200 bg-white text-red-900'
             }`}
           >
             {isSuccess ? (
-              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden />
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" aria-hidden />
             ) : (
-              <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-danger" aria-hidden />
+              <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-600" aria-hidden />
             )}
             <p className="flex-1 text-sm font-medium">{toast.message}</p>
             <button
               type="button"
               onClick={onDismiss}
-              className="shrink-0 rounded-lg p-0.5 text-muted transition hover:bg-white/10 hover:text-white"
+              className="shrink-0 rounded-lg p-1 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
               aria-label="Dismiss notification"
             >
               <X className="h-4 w-4" />

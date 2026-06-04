@@ -7,6 +7,7 @@ type EmptyStateProps = {
   title: string
   description: string
   action?: ReactNode
+  compact?: boolean
 }
 
 export function EmptyState({
@@ -14,15 +15,20 @@ export function EmptyState({
   title,
   description,
   action,
+  compact,
 }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-surface-raised/50 px-6 py-14 text-center">
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent ring-1 ring-accent/20">
-        <Icon className="h-7 w-7" aria-hidden />
+    <div
+      className={`flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-200 bg-slate-50/80 text-center ${
+        compact ? 'px-4 py-8' : 'px-6 py-14'
+      }`}
+    >
+      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+        <Icon className="h-6 w-6" aria-hidden />
       </div>
-      <h3 className="mt-5 text-lg font-semibold text-white">{title}</h3>
-      <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted">{description}</p>
-      {action && <div className="mt-6">{action}</div>}
+      <h3 className="mt-4 text-base font-semibold text-slate-900">{title}</h3>
+      <p className="mt-1.5 max-w-sm text-sm leading-relaxed text-slate-600">{description}</p>
+      {action && <div className="mt-5">{action}</div>}
     </div>
   )
 }
