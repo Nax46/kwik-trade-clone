@@ -17,20 +17,16 @@ import authRoutes from './routes/auth.routes.js'
 export function createApp() {
   const app = express()
 
-  app.set('trust proxy', 1)
-  app.use(helmet())
   app.use(
-    cors({
-      origin: (origin, callback) => {
-        if (!origin || corsOrigins.includes(origin)) {
-          callback(null, true)
-        } else {
-          callback(new ApiError(403, 'CORS blocked'))
-        }
-      },
-      credentials: true,
-    }),
-  )
+  cors({
+    origin: true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }),
+)
+
+app.options('*', cors())
   app.use(
     rateLimit({
       windowMs: 15 * 60 * 1000,
