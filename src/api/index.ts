@@ -108,5 +108,17 @@ export const api = {
       unwrap(apiClient.get('/admin/newsletter', { params })),
     updateSettings: (body: Record<string, unknown>) =>
       unwrap(apiClient.patch('/admin/settings', body)),
+    notifications: () =>
+      unwrap<{ items: unknown[]; unreadCount: number }>(
+        apiClient.get('/admin/notifications'),
+      ),
+    markNotificationRead: (id: string) =>
+      unwrap<{ unreadCount: number }>(apiClient.patch(`/admin/notifications/${id}/read`)),
+    markAllNotificationsRead: () =>
+      unwrap<{ unreadCount: number }>(apiClient.patch('/admin/notifications/read-all')),
+    deleteNotification: (id: string) =>
+      unwrap<{ unreadCount: number }>(apiClient.delete(`/admin/notifications/${id}`)),
+    clearAllNotifications: () =>
+      unwrap<{ unreadCount: number }>(apiClient.delete('/admin/notifications')),
   },
 }

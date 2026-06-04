@@ -4,6 +4,7 @@ import { Booking } from '../models/Booking.js'
 import { Lead } from '../models/Lead.js'
 import { getAvailableSlots } from '../services/booking.service.js'
 import { notifyAdminNewBooking } from '../services/email.service.js'
+import { notifyNewBooking } from '../services/notification.service.js'
 import { trackBookingConversion, trackLeadConversion } from '../services/analytics.service.js'
 import { ApiError } from '../utils/ApiError.js'
 import { sendSuccess } from '../utils/response.js'
@@ -27,12 +28,20 @@ export async function createBooking(req: AuthRequest, res: Response) {
   })
   await trackBookingConversion()
   await trackLeadConversion()
-  await notifyAdminNewBooking({
-    name: booking.name,
-    email: booking.email,
-    date: booking.date,
-    timeSlot: booking.timeSlot,
-  })
+  await Promise.all([
+    notifyAdminNewBooking({
+      name: booking.name,
+      email: booking.email,
+      date: booking.date,
+      timeSlot: booking.timeSlot,
+    }),
+    notifyNewBooking({
+      _id: booking._id,
+      name: booking.name,
+      date: booking.date,
+      timeSlot: booking.timeSlot,
+    }),
+  ])
   sendSuccess(res, { id: booking._id }, 201, 'Consultation booked successfully')
 }
 

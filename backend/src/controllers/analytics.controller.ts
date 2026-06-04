@@ -32,8 +32,16 @@ export async function dashboard(_req: AuthRequest, res: Response) {
     getAnalyticsSummary(30),
   ])
 
-  const recentLeads = await Lead.find().sort({ createdAt: -1 }).limit(5)
-  const recentBookings = await Booking.find().sort({ createdAt: -1 }).limit(5)
+  const recentLeads = await Lead.find()
+    .sort({ createdAt: -1 })
+    .limit(5)
+    .select('name email phone status source message experienceLevel interestedService createdAt')
+    .lean()
+  const recentBookings = await Booking.find()
+    .sort({ createdAt: -1 })
+    .limit(5)
+    .select('name email phone date timeSlot status experienceLevel interestedService message createdAt')
+    .lean()
 
   sendSuccess(res, {
     cards: {

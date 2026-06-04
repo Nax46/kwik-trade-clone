@@ -2,6 +2,7 @@ import type { Response } from 'express'
 import type { AuthRequest } from '../middleware/auth.js'
 import { Lead } from '../models/Lead.js'
 import { notifyAdminNewLead } from '../services/email.service.js'
+import { notifyNewLead } from '../services/notification.service.js'
 import { trackLeadConversion } from '../services/analytics.service.js'
 import { ApiError } from '../utils/ApiError.js'
 import { sendSuccess } from '../utils/response.js'
@@ -14,12 +15,20 @@ export async function createLead(req: AuthRequest, res: Response) {
   }
   const lead = await Lead.create(body)
   await trackLeadConversion()
-  await notifyAdminNewLead({
-    name: lead.name,
-    email: lead.email,
-    phone: lead.phone,
-    source: lead.source,
-  })
+  await Promise.all([
+    notifyAdminNewLead({
+      name: lead.name,
+      email: lead.email,
+      phone: lead.phone,
+      source: lead.source,
+    }),
+    notifyNewLead({
+      _id: lead._id,
+      name: lead.name,
+      email: lead.email,
+      source: lead.source,
+    }),
+  ])
   sendSuccess(res, { id: lead._id }, 201, 'Thank you! We will contact you soon.')
 }
 

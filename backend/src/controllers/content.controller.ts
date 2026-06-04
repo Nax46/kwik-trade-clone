@@ -5,6 +5,7 @@ import { Testimonial } from '../models/Testimonial.js'
 import { NewsletterSubscriber } from '../models/NewsletterSubscriber.js'
 import { Settings, ensureDefaultSettings } from '../models/Settings.js'
 import { ApiError } from '../utils/ApiError.js'
+import { notifyNewSubscriber } from '../services/notification.service.js'
 import { sendSuccess } from '../utils/response.js'
 
 export async function getPublicSettings(_req: AuthRequest, res: Response) {
@@ -76,7 +77,8 @@ export async function subscribeNewsletter(req: AuthRequest, res: Response) {
     sendSuccess(res, null, 200, 'Subscribed successfully')
     return
   }
-  await NewsletterSubscriber.create({ email })
+  const sub = await NewsletterSubscriber.create({ email })
+  await notifyNewSubscriber(email, sub._id)
   sendSuccess(res, null, 201, 'Subscribed successfully')
 }
 

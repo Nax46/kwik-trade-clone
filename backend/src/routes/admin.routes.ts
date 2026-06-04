@@ -5,6 +5,7 @@ import * as booking from '../controllers/booking.controller.js'
 import * as blog from '../controllers/blog.controller.js'
 import * as insight from '../controllers/insight.controller.js'
 import * as content from '../controllers/content.controller.js'
+import * as notification from '../controllers/notification.controller.js'
 import { protect } from '../middleware/auth.js'
 import { validateBody, validateQuery } from '../middleware/validate.js'
 import { asyncHandler } from '../utils/asyncHandler.js'
@@ -18,6 +19,12 @@ router.use(protect)
 
 router.get('/dashboard', asyncHandler(analytics.dashboard))
 router.get('/analytics', asyncHandler(analytics.adminAnalytics))
+
+router.get('/notifications', asyncHandler(notification.listNotifications))
+router.patch('/notifications/read-all', asyncHandler(notification.markAllRead))
+router.delete('/notifications', asyncHandler(notification.clearAllNotifications))
+router.patch('/notifications/:id/read', asyncHandler(notification.markRead))
+router.delete('/notifications/:id', asyncHandler(notification.deleteNotification))
 
 router.get('/leads', validateQuery(listLeadsQuerySchema), asyncHandler(lead.listLeads))
 router.patch('/leads/:id', validateBody(updateLeadSchema), asyncHandler(lead.updateLead))

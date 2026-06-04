@@ -1,4 +1,5 @@
-import { Bell, LogOut, Menu } from 'lucide-react'
+import { LogOut, Menu } from 'lucide-react'
+import { NotificationCenter } from './NotificationCenter'
 import { useLocation } from 'react-router-dom'
 import { useAdminAuth } from '../../../context/AdminAuthContext'
 import { adminNavItems } from '../../config/nav'
@@ -46,13 +47,7 @@ export function AdminTopbar({ onMenuClick, sidebarOpen = false }: AdminTopbarPro
       </div>
 
       <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
-        <button
-          type="button"
-          className="rounded-lg border border-slate-200 p-2 text-slate-500 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
-          aria-label="Notifications"
-        >
-          <Bell className="h-5 w-5" />
-        </button>
+        <NotificationCenter />
         <div className="flex max-w-[min(100%,200px)] items-center gap-1.5 rounded-lg border border-slate-200 py-1 pl-1 pr-1 sm:max-w-none sm:gap-2.5 sm:py-1.5 sm:pl-1.5 sm:pr-2">
           <span
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-brand-100 text-xs font-semibold text-brand-700 sm:text-sm"
