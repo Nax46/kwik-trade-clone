@@ -26,15 +26,12 @@ export function createApp() {
   }),
 )
 
-app.options('*', cors())
-  app.use(
-    rateLimit({
-      windowMs: 15 * 60 * 1000,
-      max: env.NODE_ENV === 'production' ? 200 : 1000,
-      standardHeaders: true,
-      legacyHeaders: false,
-    }),
-  )
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  }),
+)
   app.use(express.json({ limit: '1mb' }))
   app.use(express.urlencoded({ extended: true }))
   app.use(sanitizeBody)
