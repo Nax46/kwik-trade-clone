@@ -23,9 +23,20 @@ export function ResourcesAdminPage() {
         {isLoading && <p className="p-4 text-sm">Loading…</p>}
         <ul className="divide-y divide-slate-100">
           {(data ?? []).map((r) => (
-            <li key={r._id} className="flex justify-between px-4 py-3 text-sm">
-              <span>{r.title}</span>
-              <button type="button" className="text-red-600" onClick={() => void api.admin.deleteResource(r._id).then(() => qc.invalidateQueries({ queryKey: ['admin', 'resources'] }))}>
+            <li
+              key={r._id}
+              className="flex flex-col gap-2 px-4 py-4 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6"
+            >
+              <span className="font-medium text-slate-900">{r.title}</span>
+              <button
+                type="button"
+                className="min-h-[44px] shrink-0 rounded-lg px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 sm:w-auto"
+                onClick={() =>
+                  void api.admin.deleteResource(r._id).then(() =>
+                    qc.invalidateQueries({ queryKey: ['admin', 'resources'] }),
+                  )
+                }
+              >
                 Delete
               </button>
             </li>

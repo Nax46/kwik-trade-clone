@@ -46,7 +46,7 @@ export function DashboardPage() {
         description="Visitors, leads, bookings, and recent activity."
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
+      <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
         <StatCard title="Total Visitors" value={cards ? formatNumber(cards.totalVisitors) : '—'} icon={Eye} loading={isLoading} />
         <StatCard title="Unique Visitors" value={cards ? formatNumber(cards.uniqueVisitors) : '—'} icon={Eye} loading={isLoading} />
         <StatCard title="Leads" value={cards ? formatNumber(cards.leads) : '—'} icon={UserPlus} loading={isLoading} />

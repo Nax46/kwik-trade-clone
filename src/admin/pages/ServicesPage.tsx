@@ -124,11 +124,22 @@ export function ServicesPage() {
       >
         <DataTable<AdminService>
           rowKey={(r) => r.id}
+          mobileTitle={(r) => r.title}
           loading={list.loading}
           columns={[
             { key: 'order', header: '#', render: (r) => r.sortOrder },
-            { key: 'title', header: 'Title', render: (r) => <span className="font-medium text-slate-900">{r.title}</span> },
-            { key: 'summary', header: 'Summary', className: 'max-w-xs', render: (r) => <span className="line-clamp-1">{r.summary}</span> },
+            {
+              key: 'title',
+              header: 'Title',
+              hideOnMobile: true,
+              render: (r) => <span className="font-medium text-slate-900">{r.title}</span>,
+            },
+            {
+              key: 'summary',
+              header: 'Summary',
+              className: 'max-w-xs',
+              render: (r) => <span className="line-clamp-2 md:line-clamp-1">{r.summary}</span>,
+            },
             {
               key: 'active',
               header: 'Status',

@@ -20,7 +20,7 @@ export function AnalyticsPage() {
         <p className="text-sm text-slate-500">Loading…</p>
       ) : (
         <>
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {Object.entries(data?.totals ?? {}).map(([key, val]) => (
               <div key={key} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
                 <p className="text-xs uppercase text-slate-500">{key.replace(/([A-Z])/g, ' $1')}</p>
@@ -28,7 +28,7 @@ export function AnalyticsPage() {
               </div>
             ))}
           </div>
-          <div className="mt-8 h-80 rounded-xl border border-slate-200 bg-white p-4">
+          <div className="mt-8 h-64 rounded-xl border border-slate-200 bg-white p-4 sm:h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data?.daily ?? []}>
                 <CartesianGrid strokeDasharray="3 3" />

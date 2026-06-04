@@ -14,14 +14,18 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       {isOpen && (
         <>
           <motion.div
+            key="backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 top-16 z-40 bg-slate-900/20 backdrop-blur-sm lg:hidden"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 top-16 z-40 bg-slate-900/40 backdrop-blur-sm lg:hidden"
             onClick={onClose}
             aria-hidden
           />
           <motion.nav
+            id="mobile-nav-menu"
+            key="panel"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -29,7 +33,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             className="fixed right-0 top-16 z-50 flex h-[calc(100dvh-4rem)] w-full max-w-[min(100%,320px)] flex-col border-l border-slate-200 bg-white shadow-elevated lg:hidden"
             aria-label="Mobile navigation"
           >
-            <div className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
+            <div className="flex flex-1 flex-col gap-1 overflow-y-auto overscroll-contain p-4">
               {mainNavLinks.map(({ label, to }) => (
                 <NavLink
                   key={to}
@@ -37,7 +41,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   end={to === '/'}
                   onClick={onClose}
                   className={({ isActive }) =>
-                    `min-h-[44px] rounded-xl px-4 py-3 text-sm font-medium transition ${
+                    `min-h-[44px] rounded-xl px-4 py-3 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${
                       isActive
                         ? 'bg-brand-50 text-brand-700'
                         : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
@@ -48,7 +52,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 </NavLink>
               ))}
             </div>
-            <div className="space-y-2 border-t border-slate-200 p-4">
+            <div className="shrink-0 space-y-2 border-t border-slate-200 p-4">
               <Button to="/consultation" className="w-full" onClick={onClose}>
                 Book consultation
               </Button>

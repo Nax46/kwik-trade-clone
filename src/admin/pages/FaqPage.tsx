@@ -98,12 +98,14 @@ export function FaqPage() {
       >
         <DataTable<FaqItem>
           rowKey={(r) => r.id}
+          mobileTitle={(r) => r.question}
           loading={list.loading}
           columns={[
             { key: 'order', header: '#', render: (r) => r.sortOrder },
             {
               key: 'question',
               header: 'Question',
+              hideOnMobile: true,
               render: (r) => <span className="font-medium text-slate-900">{r.question}</span>,
             },
             {

@@ -21,7 +21,7 @@ export function MainLayout() {
       <PageMeta title={defaultSeo.title} description={defaultSeo.description} path={location.pathname} />
       <OrganizationSchema />
       <SkipToContent />
-      <div className="flex min-h-svh flex-col">
+      <div className="flex min-h-svh flex-col overflow-x-hidden">
         <Navbar />
         <main id="main-content" className="flex-1" tabIndex={-1}>
           <AnimatePresence mode="wait">

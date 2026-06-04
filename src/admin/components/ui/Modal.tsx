@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { useBodyScrollLock } from '../../../hooks/useBodyScrollLock'
+import { useCloseOnEscape } from '../../../hooks/useCloseOnEscape'
 
 type ModalProps = {
   isOpen: boolean
@@ -18,10 +20,13 @@ const sizeClasses = {
 }
 
 export function Modal({ isOpen, onClose, title, description, children, size = 'lg' }: ModalProps) {
+  useBodyScrollLock(isOpen)
+  useCloseOnEscape(isOpen, onClose)
+
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -34,12 +39,12 @@ export function Modal({ isOpen, onClose, title, description, children, size = 'l
             initial={{ opacity: 0, scale: 0.96, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 8 }}
-            className={`relative w-full ${sizeClasses[size]} max-h-[90vh] overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-xl`}
+            className={`relative w-full ${sizeClasses[size]} max-h-[92dvh] overflow-y-auto rounded-t-2xl border border-slate-200 bg-white shadow-xl sm:max-h-[90vh] sm:rounded-xl`}
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
           >
-            <div className="sticky top-0 flex items-start justify-between border-b border-slate-100 bg-white px-6 py-4">
+            <div className="sticky top-0 flex items-start justify-between border-b border-slate-100 bg-white px-4 py-4 sm:px-6">
               <div>
                 <h2 id="modal-title" className="text-lg font-semibold text-slate-900">
                   {title}
@@ -51,13 +56,13 @@ export function Modal({ isOpen, onClose, title, description, children, size = 'l
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-lg p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-600"
-                aria-label="Close"
+                className="touch-target rounded-lg p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+                aria-label="Close dialog"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <div className="px-6 py-5">{children}</div>
+            <div className="px-4 py-5 sm:px-6">{children}</div>
           </motion.div>
         </div>
       )}

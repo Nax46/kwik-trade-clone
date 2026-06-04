@@ -29,12 +29,14 @@ export function TestimonialsPage() {
         {isLoading && <p className="p-4 text-sm">Loading…</p>}
         <ul className="divide-y divide-slate-100">
           {(data ?? []).map((t) => (
-            <li key={t._id} className="px-4 py-3 text-sm">
-              <p className="font-medium">{t.name} — {t.role}</p>
+            <li key={t._id} className="space-y-2 px-4 py-4 text-sm sm:px-6">
+              <p className="font-medium text-slate-900">
+                {t.name} — {t.role}
+              </p>
               <p className="text-slate-600">{t.content}</p>
               <button
                 type="button"
-                className="mt-2 text-red-600"
+                className="min-h-[44px] rounded-lg px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
                 onClick={() => void api.admin.deleteTestimonial(t._id).then(() => qc.invalidateQueries({ queryKey: ['admin', 'testimonials'] }))}
               >
                 Delete

@@ -23,7 +23,7 @@ export function TableToolbar({
   return (
     <div className="flex flex-col gap-3 border-b border-slate-100 p-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
       <div className="flex flex-1 flex-col gap-3 sm:flex-row sm:items-center">
-        <div className="relative max-w-sm flex-1">
+        <div className="relative w-full flex-1 sm:max-w-sm">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             type="search"
@@ -35,7 +35,7 @@ export function TableToolbar({
         </div>
         {filters}
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row">
         {onReset && (
           <button
             type="button"

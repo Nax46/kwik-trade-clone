@@ -26,8 +26,11 @@ export function InsightsAdminPage() {
         {isLoading && <p className="p-4 text-sm">Loading…</p>}
         <ul className="divide-y divide-slate-100">
           {data?.items.map((i) => (
-            <li key={i._id} className="flex justify-between px-4 py-3 text-sm">
-              <span className="font-medium">{i.title}</span>
+            <li
+              key={i._id}
+              className="flex flex-col gap-1 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6"
+            >
+              <span className="font-medium text-slate-900">{i.title}</span>
               <span className="text-slate-500">{i.status}</span>
             </li>
           ))}

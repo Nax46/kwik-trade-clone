@@ -103,18 +103,25 @@ export function TeamPage() {
       >
         <DataTable<TeamMember>
           rowKey={(r) => r.id}
+          mobileTitle={(r) => r.name}
           loading={list.loading}
           columns={[
             {
               key: 'avatar',
               header: '',
+              hideOnMobile: true,
               render: (r) => (
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-100 text-xs font-bold text-brand-700">
                   {r.image}
                 </span>
               ),
             },
-            { key: 'name', header: 'Name', render: (r) => <span className="font-medium text-slate-900">{r.name}</span> },
+            {
+              key: 'name',
+              header: 'Name',
+              hideOnMobile: true,
+              render: (r) => <span className="font-medium text-slate-900">{r.name}</span>,
+            },
             { key: 'role', header: 'Role', render: (r) => r.role },
             {
               key: 'published',

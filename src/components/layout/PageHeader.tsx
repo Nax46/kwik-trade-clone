@@ -19,7 +19,7 @@ export function PageHeader({ label, title, description }: PageHeaderProps) {
         {label && (
           <p className="text-xs font-semibold uppercase tracking-widest text-brand-600">{label}</p>
         )}
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+        <h1 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
           {title}
         </h1>
         {description && (

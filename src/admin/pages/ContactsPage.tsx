@@ -115,9 +115,15 @@ export function ContactsPage() {
       >
         <DataTable<ContactRequest>
           rowKey={(r) => r.id}
+          mobileTitle={(r) => r.fullName}
           loading={list.loading}
           columns={[
-            { key: 'name', header: 'Name', render: (r) => <span className="font-medium text-slate-900">{r.fullName}</span> },
+            {
+              key: 'name',
+              header: 'Name',
+              hideOnMobile: true,
+              render: (r) => <span className="font-medium text-slate-900">{r.fullName}</span>,
+            },
             { key: 'subject', header: 'Subject', render: (r) => r.subject },
             { key: 'email', header: 'Email', render: (r) => r.email },
             {
